@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+
+
+    <!--按照比例设置宽高-->
+    <declare-styleable name="RatioMarginLayout">
+
+        <attr name="matchType" >
+            <enum name="ratioType" value="0" />
+            <enum name="scaleType" value="1" />
+            <enum name="originType" value="2" />
+        </attr>
+
+        <!--是否是以横向缩放为基准-->
+        <attr name="baseWidth" format="boolean" />
+        <!--宽高比例 宽度除以高度-->
+        <attr name="ratioValue" format="float" />
+        <!--设计图中控件宽度-->
+        <attr name="widthDesign" format="float"  />
+        <!--设计图中控件高度-->
+        <attr name="heightDesign" format="float" />
+        <!--各种margin-->
+        <attr name="leftMarginDesign" format="float" />
+        <attr name="topMarginDesign" format="float" />
+        <attr name="rightMarginDesign" format="float" />
+        <attr name="bottomMarginDesign" format="float" />
+        <!--各种padding-->
+        <attr name="paddingDesign" format="float" />
+        <attr name="leftPaddingDesign" format="float" />
+        <attr name="topPaddignDesign" format="float" />
+        <attr name="rightPaddingDesign" format="float" />
+        <attr name="bottomPaddingDesign" format="float" />
+        <!--设计图屏幕宽高-->
+        <attr name="DesignScreenWidth" format="float"  />
+        <attr name="DesignScreenHeight" format="float"  />
+
+    </declare-styleable>
+
+
+</resources>

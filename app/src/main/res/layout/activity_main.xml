@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!--android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            这里其实已经失效了
+            matchType 有三种模式:宽高比例模式(ratioType),横向纵向缩放模式(scaleType),原始模式(originType)
+            -->
+        <com.xuhuawei.matchuidemo.view.scales.ScaleMarginImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorAccent"
+            android:scaleType="fitXY"
+            android:src="@mipmap/card_topview"
+            app:baseWidth="true"
+            app:matchType="ratioType"
+            app:ratioValue="1.5"
+            app:widthDesign="375" />
+
+
+        <com.xuhuawei.matchuidemo.view.scales.ScaleFitHeightTextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorPrimary"
+            android:gravity="center"
+            android:text="Hello World"
+            app:baseWidth="true"
+            app:matchType="ratioType"
+            app:ratioValue="8"
+            app:widthDesign="375" />
+    </LinearLayout>
+</ScrollView>
