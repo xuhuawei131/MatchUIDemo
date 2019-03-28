@@ -64,6 +64,10 @@ public class ScaleViewHelper extends BaseMatchUIHelper {
         //如果是ratio模式会使用
         baseWidth = typedArray.getBoolean(R.styleable.RatioMarginLayout_baseWidth, DEFAULT_RATIO_WIDTH_BASE);
         ratioValue = typedArray.getFloat(R.styleable.RatioMarginLayout_ratioValue, -1);
+        //如果没有写ratioValue 但是写了 宽高 那么可以去计算
+        if (widthRatio!=-1&&heightRatio!=-1&&ratioValue==-1){
+            ratioValue=widthRatio*1.0f/heightRatio;
+        }
 
         dreamWdithLength = typedArray.getFloat(R.styleable.RatioMarginLayout_DesignScreenWidth, DEFAULT_DESIGN_WIDTH);
         dreamHeightLength = typedArray.getFloat(R.styleable.RatioMarginLayout_DesignScreenHeight, DEFAULT_DESIGN_HEIGHT);
