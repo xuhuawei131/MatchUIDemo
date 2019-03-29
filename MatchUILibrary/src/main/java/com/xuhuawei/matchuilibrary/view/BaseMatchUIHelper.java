@@ -1,4 +1,4 @@
-package com.xuhuawei.matchuidemo.view;
+package com.xuhuawei.matchuilibrary.view;
 
 public abstract class BaseMatchUIHelper {
 

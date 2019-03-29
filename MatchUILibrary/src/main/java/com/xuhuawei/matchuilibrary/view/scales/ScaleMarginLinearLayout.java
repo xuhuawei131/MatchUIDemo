@@ -1,30 +1,30 @@
-package com.xuhuawei.matchuidemo.view.scales;
+package com.xuhuawei.matchuilibrary.view.scales;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 
-import com.xuhuawei.matchuidemo.view.BaseMatchUIHelper;
+import com.xuhuawei.matchuilibrary.view.BaseMatchUIHelper;
 
 
 /**
  * Created by xuhuawei on 2017/12/29.
  */
 
-public class ScaleMarginFrameLayout extends FrameLayout {
+public class ScaleMarginLinearLayout extends LinearLayout {
 
     private BaseMatchUIHelper mRatioViewHelper;
 
-    public ScaleMarginFrameLayout(Context context) {
+    public ScaleMarginLinearLayout(Context context) {
         this(context,null);
     }
 
-    public ScaleMarginFrameLayout(Context context, AttributeSet attrs) {
+    public ScaleMarginLinearLayout(Context context, AttributeSet attrs) {
         this(context, attrs,0);
 
     }
 
-    public ScaleMarginFrameLayout(Context context, AttributeSet attrs, int defStyleAttr) {
+    public ScaleMarginLinearLayout(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         mRatioViewHelper = new ScaleViewHelper(this, attrs);
     }

@@ -15,7 +15,7 @@
             这里其实已经失效了
             matchType 有三种模式:宽高比例模式(ratioType),横向纵向缩放模式(scaleType),原始模式(originType)
             -->
-        <com.xuhuawei.matchuidemo.view.scales.ScaleMarginImageView
+        <com.xuhuawei.matchuilibrary.view.scales.ScaleMarginImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/colorAccent"
@@ -27,7 +27,7 @@
             app:widthDesign="375" />
 
 
-        <com.xuhuawei.matchuidemo.view.scales.ScaleFitHeightTextView
+        <com.xuhuawei.matchuilibrary.view.scales.ScaleFitHeightTextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/colorPrimary"

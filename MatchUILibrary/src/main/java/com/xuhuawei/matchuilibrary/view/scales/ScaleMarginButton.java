@@ -1,9 +1,8 @@
-package com.xuhuawei.matchuidemo.view.scales;
+package com.xuhuawei.matchuilibrary.view.scales;
 
 import android.content.Context;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
-import android.widget.Button;
 
 public class ScaleMarginButton extends android.support.v7.widget.AppCompatButton {
     private ScaleViewHelper mRatioViewHelper;

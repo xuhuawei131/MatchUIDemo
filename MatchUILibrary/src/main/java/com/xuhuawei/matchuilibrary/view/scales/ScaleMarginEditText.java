@@ -1,9 +1,8 @@
-package com.xuhuawei.matchuidemo.view.scales;
+package com.xuhuawei.matchuilibrary.view.scales;
 
 import android.content.Context;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
-import android.widget.EditText;
 
 public class ScaleMarginEditText extends android.support.v7.widget.AppCompatEditText {
     private ScaleViewHelper mRatioViewHelper;

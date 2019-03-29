@@ -1,4 +1,4 @@
-package com.xuhuawei.matchuidemo.view.scales;
+package com.xuhuawei.matchuilibrary.view.scales;
 
 import android.content.Context;
 import android.content.res.Resources;
@@ -8,8 +8,9 @@ import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.xuhuawei.matchuidemo.R;
-import com.xuhuawei.matchuidemo.view.BaseMatchUIHelper;
+import com.xuhuawei.matchuilibrary.R;
+import com.xuhuawei.matchuilibrary.view.BaseMatchUIHelper;
+
 
 /**
  * 以横向或者纵向的缩放比例为准进行适配

@@ -1,4 +1,4 @@
-package com.xuhuawei.matchuidemo.view.scales;
+package com.xuhuawei.matchuilibrary.view.scales;
 
 import android.content.Context;
 import android.graphics.Paint;
