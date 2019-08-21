@@ -38,5 +38,14 @@
 
     </declare-styleable>
 
+    <declare-styleable name="BadgeTextView">
+        <!--background color-->
+        <attr name="normalBackgroundColor" format="color|reference"/>
+        <attr name="pressedBackgroundColor" format="color|reference"/>
+        <attr name="unableBackgroundColor" format="color|reference"/>
 
+        <attr name="textSizeVerticalRatio" format="float"/>
+        <attr name="textSizeHorizionRatio" format="float"/>
+
+    </declare-styleable>
 </resources>
