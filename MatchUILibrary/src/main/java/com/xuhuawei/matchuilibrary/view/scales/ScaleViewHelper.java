@@ -54,7 +54,7 @@ public class ScaleViewHelper extends BaseMatchUIHelper {
     private int childHeightSize;
 
     private View view;
-
+    private int measureSpec[] = new int[2];
     public ScaleViewHelper(View view, AttributeSet attrs) {
         this.view = view;
         TypedArray typedArray = view.getContext().obtainStyledAttributes(attrs, R.styleable.RatioMarginLayout);//TypedArray是一个数组容器
@@ -186,7 +186,6 @@ public class ScaleViewHelper extends BaseMatchUIHelper {
 
     @Override
     public int[] onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        int measureSpec[] = new int[]{widthMeasureSpec, heightMeasureSpec};
         if (matchType != MATCH_TYPE_ORIGIN) {
             setMarginData();
             measureSpec[0] = View.MeasureSpec.makeMeasureSpec(
