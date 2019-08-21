@@ -1,9 +1,9 @@
 package com.xuhuawei.matchuidemo;
 
-import android.support.v7.app.AppCompatActivity;
+import android.app.Activity;
 import android.os.Bundle;
 
-public class ScaleMainActivity extends AppCompatActivity {
+public class ScaleMainActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

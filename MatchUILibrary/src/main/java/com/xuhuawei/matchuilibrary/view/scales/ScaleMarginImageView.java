@@ -11,7 +11,7 @@ import com.xuhuawei.matchuilibrary.view.BaseMatchUIHelper;
  * Created by xuhuawei on 2017/12/29.
  */
 
-public class ScaleMarginImageView extends android.support.v7.widget.AppCompatImageView {
+public class ScaleMarginImageView extends ImageView {
 
     private BaseMatchUIHelper mRatioViewHelper;
 

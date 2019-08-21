@@ -2,18 +2,18 @@ package com.xuhuawei.matchuilibrary.view.scales;
 
 import android.content.Context;
 import android.graphics.Paint;
-import android.support.annotation.Nullable;
 import android.text.TextPaint;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.Gravity;
+import android.widget.TextView;
 
 
 /**
  * Created by xuhuawei on 2017/11/30.
  */
 
-public class ScaleFitHeightTextView extends android.support.v7.widget.AppCompatTextView {
+public class ScaleFitHeightTextView extends TextView {
     private Paint mTextPaint;
     private float mMaxTextSize; // 获取当前所设置文字大小作为最大文字大小
     private float mMinTextSize = 8;    //最小的字体大小
@@ -23,7 +23,7 @@ public class ScaleFitHeightTextView extends android.support.v7.widget.AppCompatT
     public ScaleFitHeightTextView(Context context) {
         super(context);
     }
-    public ScaleFitHeightTextView(Context context, @Nullable AttributeSet attrs) {
+    public ScaleFitHeightTextView(Context context,  AttributeSet attrs) {
         super(context, attrs);
         init(attrs);
     }

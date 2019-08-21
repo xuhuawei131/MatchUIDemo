@@ -1,21 +1,21 @@
 package com.xuhuawei.matchuilibrary.view.scales;
 
 import android.content.Context;
-import android.support.annotation.Nullable;
 import android.util.AttributeSet;
+import android.widget.Button;
 
-public class ScaleMarginButton extends android.support.v7.widget.AppCompatButton {
+public class ScaleMarginButton extends Button {
     private ScaleViewHelper mRatioViewHelper;
     public ScaleMarginButton(Context context) {
         super(context);
     }
 
-    public ScaleMarginButton(Context context, @Nullable AttributeSet attrs) {
+    public ScaleMarginButton(Context context,  AttributeSet attrs) {
         super(context, attrs);
         mRatioViewHelper=new ScaleViewHelper(this,attrs);
     }
 
-    public ScaleMarginButton(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public ScaleMarginButton(Context context,  AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
     @Override
