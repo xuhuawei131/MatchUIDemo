@@ -3,10 +3,14 @@ package com.xuhuawei.matchuilibrary.view.badgeview;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
+import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.StateListDrawable;
+import android.text.TextPaint;
 import android.util.AttributeSet;
+import android.util.Log;
+import android.util.TypedValue;
 import android.widget.TextView;
 
 import com.xuhuawei.matchuilibrary.R;
@@ -29,38 +33,52 @@ public class BadgeTextView extends TextView {
     private int[][] states;
     private StateListDrawable mStateBackground;
 
-    private  float SMALL_SIZE;
-    private  float BIG_SIZE;
-    private  static final float TEXT_SIZE=20f;
+    private float SMALL_SIZE;
+    private float DOU_SMALL_SIZE;
+    private float BIG_SIZE;
+    private static final float TEXT_SIZE = 20f;
 
     private float textSizeVerticalRatio;
     private float textSizeHorizionRatio;
+
+    private Paint mTextPaint;
+    private float mMinTextSize = 8;    //最小的字体大小
+
+    private int heightMode;//测试模式
+
+
+    private boolean isExactly=false;
     public BadgeTextView(Context context) {
         super(context);
         init(null);
     }
 
-    public BadgeTextView(Context context,  AttributeSet attrs) {
+    public BadgeTextView(Context context, AttributeSet attrs) {
         super(context, attrs);
         init(attrs);
     }
 
-    public BadgeTextView(Context context,  AttributeSet attrs, int defStyleAttr) {
+    public BadgeTextView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init(attrs);
     }
 
     private void init(AttributeSet attrs) {
 
-        SMALL_SIZE=UIUtils.dip2px(getContext(),2);
-        BIG_SIZE=UIUtils.dip2px(getContext(),8);
+        SMALL_SIZE = UIUtils.dip2px(getContext(), 2);
+        DOU_SMALL_SIZE=SMALL_SIZE+SMALL_SIZE;
+        BIG_SIZE = UIUtils.dip2px(getContext(), 8);
+
+
+        setLines(1);
+        mTextPaint = new TextPaint();
+        mTextPaint.set(this.getPaint());
 
         states = new int[4][];
-
         Drawable drawable = getBackground();
-        if(drawable != null && drawable instanceof StateListDrawable){
+        if (drawable != null && drawable instanceof StateListDrawable) {
             mStateBackground = (StateListDrawable) drawable;
-        }else{
+        } else {
             mStateBackground = new StateListDrawable();
         }
 
@@ -69,20 +87,20 @@ public class BadgeTextView extends TextView {
         mUnableBackground = new GradientDrawable();
 
         //pressed, focused, normal, unable
-        states[0] = new int[] { android.R.attr.state_enabled, android.R.attr.state_pressed };
-        states[1] = new int[] { android.R.attr.state_enabled, android.R.attr.state_focused };
-        states[3] = new int[] { -android.R.attr.state_enabled};
-        states[2] = new int[] { android.R.attr.state_enabled };
+        states[0] = new int[]{android.R.attr.state_enabled, android.R.attr.state_pressed};
+        states[1] = new int[]{android.R.attr.state_enabled, android.R.attr.state_focused};
+        states[3] = new int[]{-android.R.attr.state_enabled};
+        states[2] = new int[]{android.R.attr.state_enabled};
 
         TypedArray a = getContext().obtainStyledAttributes(attrs, R.styleable.BadgeTextView);
 
 
-        textSizeVerticalRatio=a.getFloat(R.styleable.BadgeTextView_textSizeVerticalRatio,-1);
-        textSizeHorizionRatio=a.getFloat(R.styleable.BadgeTextView_textSizeHorizionRatio,-1);
+        textSizeVerticalRatio = a.getFloat(R.styleable.BadgeTextView_textSizeVerticalRatio, -1);
+        textSizeHorizionRatio = a.getFloat(R.styleable.BadgeTextView_textSizeHorizionRatio, -1);
 
-        if (textSizeVerticalRatio<0||textSizeHorizionRatio<0){
-            textSizeVerticalRatio=SMALL_SIZE/TEXT_SIZE;
-            textSizeHorizionRatio=BIG_SIZE/TEXT_SIZE;
+        if (textSizeVerticalRatio < 0 || textSizeHorizionRatio < 0) {
+            textSizeVerticalRatio = SMALL_SIZE / TEXT_SIZE;
+            textSizeHorizionRatio = BIG_SIZE / TEXT_SIZE;
         }
 
         //set background color
@@ -108,27 +126,60 @@ public class BadgeTextView extends TextView {
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
 
-        int measureWidth=getMeasuredWidth();
-        int measureHeight=getMeasuredHeight();
+        int measureWidth = getMeasuredWidth();
+        int measureHeight = getMeasuredHeight();
 
-        float textSize= getTextSize();
-        float smalSize=textSize*textSizeVerticalRatio;
-        float bigSize=textSize*textSizeHorizionRatio;
+        heightMode = MeasureSpec.getMode(heightMeasureSpec);
 
-        int size=getText().length();
-        if (size<=1){
-            int maxSize=measureWidth>measureHeight?measureWidth:measureHeight;
-            maxSize+=smalSize;
-            measureWidth=maxSize;
-            measureHeight=maxSize;
-        }else{
-            measureWidth+= bigSize ;
-            measureHeight+=smalSize;
+
+        if (heightMode == MeasureSpec.EXACTLY) {
+            isExactly=true;
+            refitText(this.getText().toString(), measureHeight-DOU_SMALL_SIZE);
         }
+        float textSize = getTextSize();
+        float smalSize = textSize * textSizeVerticalRatio;
+        float bigSize = textSize * textSizeHorizionRatio;
+        int size = getText().length();
 
+
+        if (isExactly) {
+            if (size <= 1) {
+                measureWidth = measureHeight;
+            } else {
+                measureWidth += bigSize;
+            }
+        }else{
+            if (size <= 1) {
+                int maxSize = measureWidth > measureHeight ? measureWidth : measureHeight;
+                maxSize += smalSize;
+                measureWidth = maxSize;
+                measureHeight = maxSize;
+            } else {
+                measureWidth += bigSize;
+                measureHeight += smalSize;
+            }
+        }
         setRadius(measureHeight / 2f);
         setMeasuredDimension(measureWidth, measureHeight);
     }
+
+    private void refitText(String textString, float height) {
+        if (height > 0) {
+            float availableHeight = height - this.getPaddingTop() - this.getPaddingBottom();   //减去边距为字体的实际高度
+            float trySize = height;
+            mTextPaint.setTextSize(trySize);
+            while (mTextPaint.descent() - mTextPaint.ascent() > availableHeight) {   //测量的字体高度过大，不断地缩放
+                trySize -= 1;  //字体不断地减小来适应
+                if (trySize <= mMinTextSize) {
+                    trySize = mMinTextSize;  //最小为这个
+                    break;
+                }
+                mTextPaint.setTextSize(trySize);
+            }
+            super.setTextSize(TypedValue.COMPLEX_UNIT_PX, trySize);
+        }
+    }
+
     public void setRadius(float radius) {
         mNormalBackground.setCornerRadius(radius);
         mPressedBackground.setCornerRadius(radius);
