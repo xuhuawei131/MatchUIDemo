@@ -21,6 +21,7 @@ import com.xuhuawei.matchuilibrary.R;
  */
 
 public class BadgeTextView extends TextView {
+    private static final String TAG="BadgeTextView";
     //background color
     private int mNormalBackgroundColor = 0;
     private int mPressedBackgroundColor = 0;
@@ -46,8 +47,6 @@ public class BadgeTextView extends TextView {
 
     private int heightMode;//测试模式
 
-
-    private boolean isExactly=false;
     public BadgeTextView(Context context) {
         super(context);
         init(null);
@@ -131,10 +130,12 @@ public class BadgeTextView extends TextView {
         int measureHeight = getMeasuredHeight();
 
         heightMode = MeasureSpec.getMode(heightMeasureSpec);
+        float heightSize = MeasureSpec.getSize(heightMeasureSpec);
+
+
 
 
         if (heightMode == MeasureSpec.EXACTLY) {
-            isExactly=true;
             refitText(this.getText().toString(), measureHeight-DOU_SMALL_SIZE);
         }
         float textSize = getTextSize();
@@ -143,7 +144,7 @@ public class BadgeTextView extends TextView {
         int size = getText().length();
 
 
-        if (isExactly) {
+        if (heightMode == MeasureSpec.EXACTLY) {
             if (size <= 1) {
                 measureWidth = measureHeight;
             } else {
@@ -160,11 +161,20 @@ public class BadgeTextView extends TextView {
                 measureHeight += smalSize;
             }
         }
+        Log.v(TAG,"heightSize="+heightSize+" measureHeight="+measureHeight+" measureWidth="+measureWidth);
         setRadius(measureHeight / 2f);
         setMeasuredDimension(measureWidth, measureHeight);
     }
 
-    private void refitText(String textString, float height) {
+//    @Override
+//    protected void onTextChanged(CharSequence text, int start, int lengthBefore, int lengthAfter) {
+//        if (heightMode != MeasureSpec.EXACTLY) {
+//            refitText(text.toString(), this.getHeight());   //textview视图的高度
+//        }
+//        super.onTextChanged(text, start, lengthBefore, lengthAfter);
+//    }
+
+    private float refitText(String textString, float height) {
         if (height > 0) {
             float availableHeight = height - this.getPaddingTop() - this.getPaddingBottom();   //减去边距为字体的实际高度
             float trySize = height;
@@ -177,7 +187,11 @@ public class BadgeTextView extends TextView {
                 }
                 mTextPaint.setTextSize(trySize);
             }
+            Log.v(TAG,"trySize="+trySize);
             super.setTextSize(TypedValue.COMPLEX_UNIT_PX, trySize);
+            return trySize;
+        }else{
+            return 8;
         }
     }
 
