@@ -71,6 +71,7 @@ public class BadgeTextView extends TextView {
 
 
         setLines(1);
+        setTextColor(0xffffffff);
         mTextPaint = new TextPaint();
         mTextPaint.set(this.getPaint());
 
